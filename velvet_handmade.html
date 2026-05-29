@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Handmade</title>
+    
+    <!-- Importamos Tailwind CSS para los estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Importamos fuentes de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Configuración personalizada de Tailwind para igualar los colores del diseño -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#5a0d0d', // Fondo rojo oscuro principal
+                        'brand-card': '#6d1616', // Fondo de las tarjetas rojo un poco más claro
+                        'brand-light': '#f4d2aa', // Color beige/crema
+                        'brand-accent': '#f7dfc0' // Color beige para botones
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos base adicionales */
+        body {
+            background-color: #5a0d0d;
+            color: white;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Animación suave para transiciones entre vistas */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Utilidad para ocultar elementos */
+        .oculto {
+            display: none !important;
+        }
+
+        /* Estilo para las imágenes de placeholder */
+        img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center pb-10">
+
+    <!-- ================= NAVEGACIÓN PRINCIPAL ================= -->
+    <nav class="w-full bg-brand-dark border-b border-brand-light/30 p-4 sticky top-0 z-50 flex justify-center gap-6 shadow-md">
+        <button onclick="cambiarVista('inicio')" id="btn-inicio" class="text-brand-light font-bold border-b-2 border-brand-light transition-all hover:text-white pb-1">Inicio</button>
+        <button onclick="cambiarVista('productos')" id="btn-productos" class="text-white/70 font-bold border-b-2 border-transparent transition-all hover:text-white pb-1">Productos</button>
+    </nav>
+
+    <!-- Contenedor Principal Beige (El marco que se ve en el diseño) -->
+    <main class="w-full max-w-4xl bg-brand-light mt-8 p-4 md:p-6 rounded-sm shadow-2xl relative">
+        
+        <!-- Logo SVG común para ambas vistas -->
+        <div class="absolute top-[-40px] left-4 md:left-10 text-brand-light w-16 h-20 opacity-80 z-10 hidden md:block">
+            <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20,10 C10,30 10,60 50,80 C90,60 90,30 80,10" />
+                <circle cx="50" cy="85" r="5" />
+                <path d="M50,15 L50,55 M30,35 L70,35 M40,25 L60,45 M60,25 L40,45" />
+            </svg>
+        </div>
+
+        <!-- ================= VISTA: INICIO (Wireframe A-f) ================= -->
+        <div id="vista-inicio" class="fade-in">
+            <!-- Encabezado Inicio -->
+            <header class="bg-brand-dark text-center py-10 mb-6 rounded flex flex-col items-center">
+                <!-- Logo versión móvil -->
+                <div class="w-12 h-16 text-brand-light mb-4 md:hidden">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20,10 C10,30 10,60 50,80 C90,60 90,30 80,10" />
+                        <circle cx="50" cy="85" r="5" />
+                        <path d="M50,15 L50,55 M30,35 L70,35 M40,25 L60,45 M60,25 L40,45" />
+                    </svg>
+                </div>
+                <h1 class="text-5xl tracking-widest text-brand-light mb-2">VELVET</h1>
+                <p class="text-brand-light text-lg tracking-wider">Handmade</p>
+            </header>
+
+            <!-- Sección Galería Superior -->
+            <section class="bg-brand-card p-6 mb-6 rounded flex flex-col items-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 w-full">
+                    <div class="aspect-square bg-gray-300 overflow-hidden">
+                        <img src="https://placehold.co/300x300/e2e8f0/475569?text=[Aretes+Largos]" alt="Aretes" class="w-full h-full hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="aspect-square bg-gray-300 overflow-hidden">
+                        <img src="https://placehold.co/300x300/cbd5e1/475569?text=[Aretes+Mariposa]" alt="Aretes Mariposa" class="w-full h-full hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="aspect-square bg-gray-300 overflow-hidden">
+                        <img src="https://placehold.co/300x300/e2e8f0/475569?text=[Aretes+Cereza]" alt="Aretes Cereza" class="w-full h-full hover:scale-105 transition-transform duration-300">
+                    </div>
+                </div>
+                <button onclick="mostrarModal('Ir a ver todos los productos')" class="bg-brand-accent text-brand-dark px-8 py-2 rounded-full font-bold hover:bg-white transition-colors">Ver más</button>
+            </section>
+
+            <!-- Bloque 1: Imagen Izquierda, Texto Derecha -->
+            <section class="bg-brand-card flex flex-col md:flex-row mb-6 rounded overflow-hidden">
+                <div class="w-full md:w-1/2 min-h-[250px] relative">
+                    <img src="https://placehold.co/500x300/a8a29e/ffffff?text=[Foto+Trabajando]" alt="Creando aretes" class="w-full h-full absolute inset-0">
+                </div>
+                <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                    <h3 class="font-bold text-xl mb-4 leading-tight">¿Alguna vez pensaste que ningún accesorio iba o definía tu estilo?</h3>
+                    <p class="text-sm leading-relaxed text-gray-200">
+                        <span class="font-bold text-brand-light text-lg">S</span>i fue así, entendemos completamente esa sensación. Es más que frustrante tratar de embellecernos aún más y no encontrar los recursos para poder hacerlo a nuestro gusto.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Bloque 2: Texto Izquierda, Imagen Derecha -->
+            <section class="bg-brand-card flex flex-col md:flex-row-reverse mb-6 rounded overflow-hidden">
+                <div class="w-full md:w-1/2 min-h-[250px] relative">
+                    <img src="https://placehold.co/500x300/d6d3d1/44403c?text=[Foto+Aretes+Mano]" alt="Mostrando aretes" class="w-full h-full absolute inset-0">
+                </div>
+                <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center items-start border-b md:border-b-0 md:border-r border-brand-light/20">
+                    <h3 class="font-bold text-xl mb-4">¡Te entendemos!</h3>
+                    <p class="text-sm leading-relaxed text-gray-200 mb-6">
+                        <span class="font-bold text-brand-light text-lg">Y</span> por eso mismo, traemos este espacio en el que te permitimos expresarte no por medio de palabras, sino de accesorios que tú mismo puedes llegar a diseñar.
+                    </p>
+                    <button onclick="cambiarVista('productos')" class="bg-brand-accent text-brand-dark px-6 py-2 rounded-full font-bold hover:bg-white transition-colors text-sm">Ver más</button>
+                </div>
+            </section>
+
+            <!-- Bloque 3: Imagen Izquierda, Texto Derecha -->
+            <section class="bg-brand-card flex flex-col md:flex-row mb-6 rounded overflow-hidden">
+                <div class="w-full md:w-1/2 min-h-[250px] relative">
+                    <img src="https://placehold.co/500x300/a8a29e/ffffff?text=[Foto+Detalle+Herramienta]" alt="Detalle de creación" class="w-full h-full absolute inset-0">
+                </div>
+                <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+                    <p class="text-sm leading-relaxed text-gray-200">
+                        <span class="font-bold text-brand-light text-lg">S</span>abemos que tienes una personalidad única que te hace destacar entre la multitud, en Velvet Handmade buscamos encandecer aún más ese brillo que tanto te carateriza, y de ser posible, convertirnos en ese espacio seguro en el que puedas ser tú, en tu máximo esplendor.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Sección Testimonios -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-brand-light text-brand-dark p-6 rounded shadow-inner">
+                    <h4 class="font-bold border-b border-brand-dark/20 pb-2 mb-3">- Cliente 1</h4>
+                    <p class="text-sm italic">"Excelente atenciñón, la calidad de los productos es muy buena :)"</p>
+                </div>
+                <div class="bg-brand-light text-brand-dark p-6 rounded shadow-inner">
+                    <h4 class="font-bold border-b border-brand-dark/20 pb-2 mb-3">- Cliente 2</h4>
+                    <p class="text-sm italic">"Me gustó mucho diseñar el producto, tienen materiales únicos."</p>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-brand-dark p-6 rounded flex flex-col md:flex-row items-center justify-between">
+                <div>
+                    <h3 class="font-serif text-2xl text-brand-light mb-4">¡Contáctanos y brilla con originalidad!</h3>
+                    <p class="text-brand-light/80 mb-1">@velvet.hndmd</p>
+                    <p class="text-brand-light/80"><span class="font-bold">Tel:</span> 3117260918</p>
+                </div>
+                <div class="w-16 h-20 text-brand-light mt-6 md:mt-0 opacity-80">
+                    <svg viewBox="0 0 100 150" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20,10 C10,30 10,60 50,80 C90,60 90,30 80,10" />
+                        <circle cx="50" cy="85" r="5" />
+                        <path d="M50,15 L50,55 M30,35 L70,35 M40,25 L60,45 M60,25 L40,45" />
+                    </svg>
+                </div>
+            </footer>
+        </div>
+
+
+        <!-- ================= VISTA: PRODUCTOS (Wireframe A) ================= -->
+        <div id="vista-productos" class="oculto fade-in">
+            
+            <!-- Encabezado Productos -->
+            <header class="bg-brand-dark text-center py-8 mb-6 rounded">
+                <h1 class="text-5xl text-white mb-2">Productos</h1>
+                <p class="text-brand-light text-xl">Aretes</p>
+            </header>
+
+            <!-- Lista de Productos -->
+            <div class="flex flex-col gap-6">
+
+                <!-- Producto 1: Mariposa (Imagen Izquierda) -->
+                <article class="bg-brand-card p-4 md:p-6 rounded flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-5/12 bg-gray-200">
+                        <img src="https://placehold.co/400x400/cbd5e1/475569?text=[Imagen+Aretes+Mariposa]" alt="Aretes Mariposa" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full md:w-7/12 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4">Aretes Mariposa</h2>
+                            <p class="mb-2 text-brand-light/90">Hechos con:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-200 space-y-1 ml-2">
+                                <li>Alambre inoxidable</li>
+                                <li>Cuarzos transparentes</li>
+                                <li>Mostacilla transparente</li>
+                                <li>Entre otros</li>
+                                <li>Tamaño: 4 cm.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center justify-end gap-0">
+                            <span class="bg-brand-dark/50 px-4 py-2 font-serif text-xl border border-brand-dark/50">$16.000</span>
+                            <button onclick="mostrarModal('Aretes Mariposa agregados al carrito')" class="bg-brand-accent text-brand-dark px-6 py-2 font-bold hover:bg-white transition-colors">Comprar Ahora</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Producto 2: Mosaico (Imagen Derecha) -->
+                <article class="bg-brand-card p-4 md:p-6 rounded flex flex-col md:flex-row-reverse gap-6">
+                    <div class="w-full md:w-5/12 bg-gray-200">
+                        <img src="https://placehold.co/400x400/e2e8f0/475569?text=[Imagen+Aretes+Mosaico]" alt="Aretes Mosaico" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full md:w-7/12 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4">Aretes Mosaico</h2>
+                            <p class="mb-2 text-brand-light/90">Hechos con:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-200 space-y-1 ml-2">
+                                <li>Alambre inoxidable</li>
+                                <li>Piedra Ojo de Tigre</li>
+                                <li>Entre otros</li>
+                                <li>Tamaño: 6 cm.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center justify-start gap-0">
+                            <button onclick="mostrarModal('Aretes Mosaico agregados al carrito')" class="bg-brand-accent text-brand-dark px-6 py-2 font-bold hover:bg-white transition-colors rounded-l-full">Comprar Ahora</button>
+                            <span class="bg-brand-dark/50 px-4 py-2 font-serif text-xl">$12.000</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Producto 3: Lágrima (Imagen Izquierda) -->
+                <article class="bg-brand-card p-4 md:p-6 rounded flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-5/12 bg-gray-200">
+                        <img src="https://placehold.co/400x400/94a3b8/ffffff?text=[Imagen+Aretes+Lágrima]" alt="Aretes Lágrima" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full md:w-7/12 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4">Aretes Lágrima</h2>
+                            <p class="mb-2 text-brand-light/90">Hechos con:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-200 space-y-1 ml-2">
+                                <li>Gotas Transparentes</li>
+                                <li>Esferas transparentes</li>
+                                <li>Mostacilla transparente</li>
+                                <li>Entre otros</li>
+                                <li>Tamaño: 2.5 cm.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center justify-end gap-0">
+                            <span class="bg-brand-dark/50 px-4 py-2 font-serif text-xl">$8.000</span>
+                            <button onclick="mostrarModal('Aretes Lágrima agregados al carrito')" class="bg-brand-accent text-brand-dark px-6 py-2 font-bold hover:bg-white transition-colors rounded-r-full">Comprar Ahora</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Producto 4: Cereza (Imagen Derecha) -->
+                <article class="bg-brand-card p-4 md:p-6 rounded flex flex-col md:flex-row-reverse gap-6">
+                    <div class="w-full md:w-5/12 bg-gray-200">
+                        <img src="https://placehold.co/400x400/cbd5e1/475569?text=[Imagen+Aretes+Cereza]" alt="Aretes Cereza" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full md:w-7/12 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4">Aretes Cereza</h2>
+                            <p class="mb-2 text-brand-light/90">Hechos con:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-200 space-y-1 ml-2">
+                                <li>Alambre inoxidable</li>
+                                <li>Muranos</li>
+                                <li>Entre otros</li>
+                                <li>Tamaño: 3.5 cm.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 flex items-center justify-start gap-0">
+                            <button onclick="mostrarModal('Aretes Cereza agregados al carrito')" class="bg-brand-accent text-brand-dark px-6 py-2 font-bold hover:bg-white transition-colors rounded-l-full">Comprar Ahora</button>
+                            <span class="bg-brand-dark/50 px-4 py-2 font-serif text-xl border-l border-brand-dark/30">$9.600</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal para interacciones (Notificaciones de botones) -->
+    <div id="modal-interaccion" class="fixed inset-0 bg-black/60 flex items-center justify-center z-[100] hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-brand-light text-brand-dark p-8 rounded-lg shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="text-4xl text-brand-dark mb-4">✨</div>
+            <h3 class="font-serif text-2xl font-bold mb-4" id="modal-mensaje">Acción realizada</h3>
+            <p class="text-sm mb-6 text-brand-dark/80">Esta es una versión de demostración.</p>
+            <button onclick="cerrarModal()" class="bg-brand-dark text-white px-6 py-2 rounded-full hover:bg-red-900 transition-colors">Aceptar</button>
+        </div>
+    </div>
+
+    <!-- Lógica de JavaScript -->
+    <script>
+        // Función para alternar entre las pestañas "Inicio" y "Productos"
+        function cambiarVista(vista) {
+            const vistaInicio = document.getElementById('vista-inicio');
+            const vistaProductos = document.getElementById('vista-productos');
+            const btnInicio = document.getElementById('btn-inicio');
+            const btnProductos = document.getElementById('btn-productos');
+
+            if (vista === 'inicio') {
+                vistaInicio.classList.remove('oculto');
+                vistaProductos.classList.add('oculto');
+                
+                // Actualizar estilos de los botones de navegación
+                btnInicio.classList.add('text-brand-light', 'border-brand-light');
+                btnInicio.classList.remove('text-white/70', 'border-transparent');
+                btnProductos.classList.add('text-white/70', 'border-transparent');
+                btnProductos.classList.remove('text-brand-light', 'border-brand-light');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (vista === 'productos') {
+                vistaProductos.classList.remove('oculto');
+                vistaInicio.classList.add('oculto');
+                
+                // Actualizar estilos de los botones de navegación
+                btnProductos.classList.add('text-brand-light', 'border-brand-light');
+                btnProductos.classList.remove('text-white/70', 'border-transparent');
+                btnInicio.classList.add('text-white/70', 'border-transparent');
+                btnInicio.classList.remove('text-brand-light', 'border-brand-light');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Lógica para el modal interactivo
+        const modal = document.getElementById('modal-interaccion');
+        const modalContent = document.getElementById('modal-content');
+        const modalMensaje = document.getElementById('modal-mensaje');
+
+        function mostrarModal(mensaje) {
+            modalMensaje.innerText = mensaje;
+            modal.classList.remove('hidden');
+            // Pequeño retraso para que la transición CSS funcione correctamente
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function cerrarModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            // Esperar a que termine la transición para ocultarlo
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
